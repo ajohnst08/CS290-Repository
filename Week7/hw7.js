@@ -1,17 +1,21 @@
 var express = require('express');
 
 var app = express();
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
+app.engine('handlebars', handlebars.engine);
+app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
+function randNum(){
+  return Math.random());
+}
 app.get('/',function(req,res){
-  res.type('text/plain');
-  res.send('Welcome to the main page!');
+  res.render('main');
 });
 
-app.get('/other-page',function(req,res){
-  res.type('text/plain');
-  res.send('Welcome to the other page!');
+app.get('/num',function(req,res){
+  res.render('num', randNum());
 });
 
 app.use(function(req,res){
