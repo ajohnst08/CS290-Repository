@@ -11,7 +11,7 @@ function randNum(){
   return Math.random();
 }
 app.get('/',function(req,res){
-  res.render('main');
+  res.render('main.handlebars');
 });
 
 app.get('/num',function(req,res){
