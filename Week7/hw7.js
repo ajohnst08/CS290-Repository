@@ -12,8 +12,8 @@ function randNum(){
   dispstuff.num = Math.random();
   return dispstuff;
 }
-app.get('/home',function(req,res){
-  res.render('home');
+app.get('/',function(req,res){
+  res.render('home.handlebars');
 });
 app.get('/num',function(req,res){
   res.render('num',randNum());
