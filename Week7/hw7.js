@@ -8,7 +8,7 @@ app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
 function randNum(){
-  return Math.random());
+  return Math.random();
 }
 app.get('/',function(req,res){
   res.render('main');
