@@ -8,9 +8,14 @@ app.set('view engine', 'handlebars');
 app.set('port', 3000);
 
 function randNum(){
-  return Math.random();
+  var dispstuff= {};
+  dispstuff.num = Math.random();
+  return dispstuff;
 }
-app.get('/',function(req,res){
+app.get('/home',function(req,res){
+  res.render('home');
+});
+app.get('/num',function(req,res){
   res.render('num',randNum());
 });
 
