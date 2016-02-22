@@ -23,7 +23,7 @@ app.get('/getme',function(req,res){
 	res.render('getme', context);
 });
 
-app.get('/postme',function(req,res){
+app.post('/postme',function(req,res){
 	var Params = [];
 	for (var p in req.body) {
 		Params.push({'name':p, 'value':req.body[p]});
