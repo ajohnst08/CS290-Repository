@@ -28,6 +28,8 @@ app.post('/postme',function(req,res){
 	for (var p in req.body) {
 		Params.push({'name':p, 'value':req.body[p]});
 	}
+	console.log(Params);
+	console.log(req.body);
 	var context = {};
 	context.lst = Params;
   res.render('postme', context);
