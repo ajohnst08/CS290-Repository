@@ -15,7 +15,7 @@ app.get('/',function(req,res){
   if (req.body['submit']){
 	  req.session.city = req.body.city;
 	  req.session.zip = req.body.zip;
-	request('http://api.openweathermap.org/data/2.5/weather?q=' + req.session.city + '&APPID=29568ddaed32e25923f823b59fc4899a' + '&units=imperial', function(err,response,body)){
+	request('http://api.openweathermap.org/data/2.5/weather?q=' + req.session.city + '&APPID=29568ddaed32e25923f823b59fc4899a' + '&units=imperial', function(err,response,body){
 	   if(!err && response.statusCode < 400){
 		context.owm = body;
 		res.render('home', context);
