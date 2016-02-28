@@ -14,8 +14,9 @@ app.get('/',function(req,res){
   var context = {};
 	request('http://api.openweathermap.org/data/2.5/weather?q=corvallis&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial', function(err,response,body){
 	   if(!err && response.statusCode < 400){
-		context.owm = 'temperature = ' + JSON.parse(body).main.temp;
-		console.log(context.own);
+		context.owm = body;
+		//'temperature = ' + JSON.parse(body).main.temp;
+		console.log(context.owm);
 		res.render('home', context);
 	   }
 	   else {
