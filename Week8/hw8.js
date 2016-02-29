@@ -44,6 +44,8 @@ app.post('/',function(req,res){
 		res.render('home',context);
 		return;
 	}
+	context.owm = req.session.body;
+	res.render('home',context);
 });
 
 app.use(function(req,res){
