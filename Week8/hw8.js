@@ -15,17 +15,8 @@ app.use(session({secret:'sec'}));
 
 app.get('/',function(req,res){
   var context = {};
-  var loc = '';
-    if(req.body['submit']){
-	req.session.city = req.body.city;
-	req.session.zip = req.body.zip;
-	if (req.session.city==''){
-		loc = req.session.zip;
-	}
-	else { 
-	loc = req.session.city;
-	}
-	request('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial', function(err,response,body){
+
+	request('http://api.openweathermap.org/data/2.5/weather?q=corvallis&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial', function(err,response,body){
 	   if(!err && response.statusCode < 400){
 		context.owm = 'temperature = ' + JSON.parse(body).main.temp;
 		console.log(context.owm);
@@ -40,8 +31,6 @@ app.get('/',function(req,res){
 	   }
 	})
 	}
-	console.log(context.owm);
-	res.render('home',context);
 });
 
 app.use(function(req,res){
