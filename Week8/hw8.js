@@ -13,10 +13,13 @@ app.set('view engine', 'handlebars');
 app.set('port', 3000);
 app.use(session({secret:'sec'}));
 
-app.get('/',function(req,res){
+app.post('/',function(req,res){
   var context = {};
 
-	request('http://api.openweathermap.org/data/2.5/weather?q=corvallis&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial', function(err,response,body){
+	request({"url":"http://api.openweathermap.org/data/2.5/weather?q=corvallis&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial",
+	"method":"POST",
+	"headers":{"Content-Type":"application/json"}
+	}, function(err,response,body){
 	   if(!err && response.statusCode < 400){
 		context.owm = 'temperature = ' + JSON.parse(body).main.temp;
 		console.log(context.owm);
