@@ -30,7 +30,6 @@ app.get('/',function(req,res){
 		   next(err);
 	   }
 	})
-	}
 });
 
 app.use(function(req,res){
