@@ -25,7 +25,11 @@ app.post('/',function(req,res){
 	else { 
 	loc = req.session.city;
 	}
-	request('http://api.openweathermap.org/data/2.5/weather?q=' + loc + '&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial', function(err,response,body){
+	request({"url":"http://api.openweathermap.org/data/2.5/weather?q="+ loc + "&APPID=29568ddaed32e25923f823b59fc4899a&units=imperial",
+	"method":"POST",
+	"headers":{
+    "Content-Type":"application/json"
+	}}, function(err,response,body){
 	   if(!err && response.statusCode < 400){
 		context.owm = 'temperature = ' + JSON.parse(body).main.temp;
 		console.log(context.owm);
@@ -40,11 +44,7 @@ app.post('/',function(req,res){
 	   }
 	})
 	}
-	else {
-		res.render('home',context);
-		return;
-	}
-	context.owm = req.session.body;
+	console.log(context.owm);
 	res.render('home',context);
 });
 
