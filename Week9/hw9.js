@@ -21,7 +21,7 @@ app.get('/',function(req,res,next){
         "headers":{
           "Content-Type":"application/json"
         },
-        "body":'{"keywords":"green","format":"json"}'
+        "body":'{"keywords":"green","format":"json","orderCol":"numVotes"}'
       }, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.colr = body;
