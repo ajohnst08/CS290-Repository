@@ -17,9 +17,7 @@ app.get('/',function(req,res,next){
   var context = {};
  request({
         "url":"http://www.colourlovers.com/api/colors",
-        "method":"GET",
-		"keywords":"green",
-		"format":"json"
+		"keywords":"green"
       }, function(err, response, body){
     if(!err && response.statusCode < 400){
       context.colr = body;
