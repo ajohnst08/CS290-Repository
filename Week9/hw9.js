@@ -1,38 +1,38 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var request = require('request');
+var session = require('express-session');
 var app = express();
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.set('port', 3000);
+app.use(session({secret:'sec'}));
 
-app.get('/',function(req,res){
-  res.render('home.handlebars');
-});
-
-app.get('/getme',function(req,res){
-	var Params = [];
-	for (var p in req.query) {
-		Params.push({'name':p, 'value':req.query[p]});
-	}
-	var context = {};
-	context.lst = Params;
-	res.render('getme', context);
-});
-
-app.post('/postme',function(req,res){
-	var Params = [];
-	for (var p in req.body) {
-		Params.push({'name':p, 'value':req.body[p]});
-	}
-	console.log(Params);
-	console.log(req.body);
-	var context = {};
-	context.lst = Params;
-  res.render('postme', context);
+app.get('/',function(req,res,next){
+  var context = {};
+ request({
+        "url":"http://www.colourlovers.com/api/colors",
+        "method":"GET",
+        "headers":{
+          "Content-Type":"application/json"
+        },
+        "body":'{"keywords":"green","format":"json"}'
+      }, function(err, response, body){
+    if(!err && response.statusCode < 400){
+      context.colr = body;
+      res.render('clr',context);
+    } else {
+      if(response){
+        console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
 });
 
 app.use(function(req,res){
