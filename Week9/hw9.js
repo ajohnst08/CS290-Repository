@@ -49,9 +49,26 @@ app.get('/palettes',function(req,res,next){
       var resps = JSON.parse(body);
 	  for (i=0; i<5; i++){
 		  context.plt.push(resps[i]);
-		  console.log(resps[i].title);
 	  }
       res.render('palette',context);
+    } else {
+      if(response){
+        console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+});
+
+app.get('/patterns',function(req,res,next){
+  var context = {};
+ request({
+        "url":"http://www.colourlovers.com/api/patterns?format=json&keywords=stripes&orderCol=numVotes&numResults=1",
+      }, function(err, response, body){
+    if(!err && response.statusCode < 400){
+      var resps = JSON.parse(body);
+	  context.ptn = resps.imageUrl;
+      res.render('pattern',context);
     } else {
       if(response){
         console.log(response.statusCode);
