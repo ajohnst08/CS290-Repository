@@ -66,8 +66,8 @@ app.get('/patterns',function(req,res,next){
         "url":"http://www.colourlovers.com/api/patterns?format=json&keywords=stripes&orderCol=numVotes&numResults=1",
       }, function(err, response, body){
     if(!err && response.statusCode < 400){
-      var resps = JSON.parse(body);
-	  context.ptn = resps.imageUrl;
+      var respss = JSON.parse(body);
+	  context.ptn = respss.imageUrl;
       res.render('pattern',context);
     } else {
       if(response){
