@@ -14,6 +14,11 @@ app.set('port', 3000);
 app.use(session({secret:'sec'}));
 
 app.get('/',function(req,res,next){
+ var context = {};
+res.render('home',context);
+})
+
+app.get('/colors',function(req,res,next){
   var context = {};
   context.colr = [];
  request({
