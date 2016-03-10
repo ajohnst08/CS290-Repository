@@ -49,6 +49,7 @@ app.get('/palettes',function(req,res,next){
       var resps = JSON.parse(body);
 	  for (i=0; i<5; i++){
 		  context.plt.push(resps[i]);
+		  console.log(resps[i].title);
 	  }
       res.render('palette',context);
     } else {
