@@ -16,14 +16,14 @@ app.use(session({secret:'sec'}));
 app.get('/',function(req,res,next){
   var context = {};
  request({
-        "url":"http://www.colourlovers.com/api/colors&keywords=green&format=json",
+        "url":"http://www.colourlovers.com/api/colors?format=json",
       }, function(err, response, body){
     if(!err && response.statusCode < 400){
       var resp = JSON.parse(body);
 	  for (i=0; i<20; i++){
-		  console.log(resp[i].id + ' ');
+		  console.log(resp[i].title + ' ');
 	  }
-	  context.clr = resp[0].id;
+	  context.clr = resp[1].id;
       res.render('clr',context);
     } else {
       if(response){
