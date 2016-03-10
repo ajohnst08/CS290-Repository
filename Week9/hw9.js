@@ -19,7 +19,7 @@ app.get('/',function(req,res,next){
         "url":"http://www.colourlovers.com/api/colors&keywords=green&format=json",
       }, function(err, response, body){
     if(!err && response.statusCode < 400){
-      context.colr = body;
+      context.colr = JSON.parse(body);
       res.render('clr',context);
     } else {
       if(response){
