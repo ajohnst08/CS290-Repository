@@ -21,7 +21,7 @@ app.get('/',function(req,res,next){
     if(!err && response.statusCode < 400){
       var resp = JSON.parse(body);
 	  for (i=0; i<20; i++){
-		  context.colr.push += resp[i];
+		  context.colr.push(resp[i]);
 	  }
       res.render('clr',context);
     } else {
