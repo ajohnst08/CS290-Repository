@@ -39,6 +39,27 @@ app.get('/colors',function(req,res,next){
   });
 });
 
+app.get('/palettes',function(req,res,next){
+  var context = {};
+  context.plt = [];
+ request({
+        "url":"http://www.colourlovers.com/api/palettes?format=json&keywords=green&orderCol=numVotes",
+      }, function(err, response, body){
+    if(!err && response.statusCode < 400){
+      var resps = JSON.parse(body);
+	  for (i=0; i<5; i++){
+		  context.plt.push(resps[i]);
+	  }
+      res.render('palette',context);
+    } else {
+      if(response){
+        console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+});
+
 app.use(function(req,res){
   res.type('text/plain');
   res.status(404);
