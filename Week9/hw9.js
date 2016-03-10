@@ -20,9 +20,9 @@ app.get('/',function(req,res,next){
       }, function(err, response, body){
     if(!err && response.statusCode < 400){
       var resp = JSON.parse(body);
-	  for (i=0; i<20; i++){
-		  context.clr += resp[i].title + "\n ";
-	  }
+	  //for (i=0; i<20; i++){
+		  context.clr = resp[5].title;
+	  //}
       res.render('clr',context);
     } else {
       if(response){
