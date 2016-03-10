@@ -15,6 +15,7 @@ app.use(session({secret:'sec'}));
 
 app.get('/',function(req,res,next){
   var context = {};
+  context.colr = [];
  request({
         "url":"http://www.colourlovers.com/api/colors?format=json",
       }, function(err, response, body){
