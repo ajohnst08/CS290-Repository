@@ -21,9 +21,8 @@ app.get('/',function(req,res,next){
     if(!err && response.statusCode < 400){
       var resp = JSON.parse(body);
 	  for (i=0; i<20; i++){
-		  console.log(resp[i].title + ' ');
+		  context.colr = resp[i].title + ' ';
 	  }
-	  context.clr = resp[1].id;
       res.render('clr',context);
     } else {
       if(response){
