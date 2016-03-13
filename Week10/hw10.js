@@ -13,6 +13,8 @@ var pool = mysql.createPool({
 	database: 'student'
 });
 
+module.exports.pool = pool;  
+
 app.get('/',function(req,res,next){
   var context = {};
   mysql.pool.query('SELECT * FROM todo', function(err, rows, fields){
