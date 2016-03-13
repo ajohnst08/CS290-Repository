@@ -53,8 +53,7 @@ app.get('/insert',function(req,res,next){
       return;
     }
   });
-	
-)};
+});
 
 app.use(function(req,res){
   res.type('text/plain');
