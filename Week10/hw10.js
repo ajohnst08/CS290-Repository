@@ -54,7 +54,7 @@ app.get('/insert',function(req,res,next){
     }
   });
 	
-}
+)};
 
 app.use(function(req,res){
   res.type('text/plain');
