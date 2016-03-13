@@ -18,14 +18,20 @@ module.exports.pool = pool;
 
 app.get('/',function(req,res,next){
   var context = {};
-pool.query('SELECT * FROM workouts', function(err, rows, fields){
+	pool.query('SELECT * FROM workouts', function(err, rows, fields){
     if(err){
       next(err);
       return;
     }
-    context.results = JSON.stringify(rows);
+    context.results = ("Name:" + rows[0].name);
     res.render('home', context);
   });
+});
+
+app.get('/workouts',function(req,res,next){
+  var context = {};
+  res.render('workouts', context);
+
 });
 
 app.get('/reset-table',function(req,res,next){
@@ -35,8 +41,8 @@ pool.query("DROP TABLE IF EXISTS workouts", function(err){
     "id INT PRIMARY KEY AUTO_INCREMENT," +
     "name VARCHAR(255) NOT NULL," +
     "reps INT," +
-	"weight INT" +
-    "due DATE" + 
+	"weight INT," +
+    "due DATE," + 
 	"lbs BOOLEAN)";
 pool.query(createString, function(err){
       context.results = "Table reset";
