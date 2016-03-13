@@ -18,7 +18,7 @@ module.exports.pool = pool;
 
 app.get('/',function(req,res,next){
   var context = {};
-pool.query('SELECT * FROM todo', function(err, rows, fields){
+pool.query('SELECT * FROM tracker', function(err, rows, fields){
     if(err){
       next(err);
       return;
@@ -30,18 +30,31 @@ pool.query('SELECT * FROM todo', function(err, rows, fields){
 
 app.get('/reset-table',function(req,res,next){
   var context = {};
-pool.query("DROP TABLE IF EXISTS todo", function(err){
-    var createString = "CREATE TABLE todo(" +
+pool.query("DROP TABLE IF EXISTS tracker", function(err){
+    var createString = "CREATE TABLE tracker(" +
     "id INT PRIMARY KEY AUTO_INCREMENT," +
     "name VARCHAR(255) NOT NULL," +
-    "done BOOLEAN," +
-    "due DATE)";
+    "reps INT," +
+	"weight INT" +
+    "due DATE)" + 
+	"lbs BOOLEAN";
 pool.query(createString, function(err){
       context.results = "Table reset";
       res.render('home',context);
     })
   });
 });
+
+app.get('/insert',function(req,res,next)){
+	var context = {};
+	pool.query("INSERT INTO tracker(`name`,`reps`,`weight`,`due`,`lbs`) VALUES (?,?,?,?,?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+  });
+	
+}
 
 app.use(function(req,res){
   res.type('text/plain');
