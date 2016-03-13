@@ -36,8 +36,8 @@ pool.query("DROP TABLE IF EXISTS tracker", function(err){
     "name VARCHAR(255) NOT NULL," +
     "reps INT," +
 	"weight INT" +
-    "due DATE)" + 
-	"lbs BOOLEAN";
+    "due DATE" + 
+	"lbs BOOLEAN)";
 pool.query(createString, function(err){
       context.results = "Table reset";
       res.render('home',context);
