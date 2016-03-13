@@ -23,7 +23,7 @@ app.get('/',function(req,res,next){
       next(err);
       return;
     }
-    context.results = ("Name:" + rows[0].name);
+    context.results =  "name";
     res.render('home', context);
   });
 });
