@@ -1,6 +1,7 @@
 var express = require ('express');
-var handlebars = require ('express-handlebars').create({defaultLayout:'main'});
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 var mysql = require('mysql');
+var app = express();
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
