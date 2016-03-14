@@ -1,16 +1,16 @@
  <form method="get">
         <label for="name-in">Name</label>
-        <input type="text" id="name-in" name="name-in">
+        <input type="text" id="name" name="name-in">
         <label for="reps-in]">Reps</label>
-        <input type="number" id="reps-in" name="reps-in">
+        <input type="number" id="reps" name="reps-in">
         <label for="weight-in">Weight</label>
-        <input type="number" id="weight-in" name="weight-in">
+        <input type="number" id="weight" name="weight-in">
         <label for="date-in">Date</label>
-        <input type="date" id="date-in" name="date-in">
-		<input type="checkbox" id="kgs" name="kgs"> Convert to lbs to kgs <br>
+        <input type="date" id="date" name="date-in">
+		<input type="checkbox" id="lbs" name="lbs"> Convert to lbs to kgs <br>
         <input type="submit" id="sub">
  </form>
- 
+ <br>
  <table>
 	<tr>
 		<th>NAME</th>
@@ -20,3 +20,32 @@
 		<th>LBS</th>
 	</tr>
 </table>
+
+<script>
+      document.addEventListener('DOMContentLoaded', bindButtons);
+      function bindButtons(){
+        document.getElementById('submit').addEventListener('click', function(event){
+          var req = new XMLHttpRequest();
+		  var payload = {name:null,reps:null,weight:null,date:null,lbs:null};
+		  payload.name = document.getElementById('name').value;
+		  payload.reps = document.getElementById('reps').value;
+		  payload.weight = document.getElementById('weight').value;
+		  payload.date = document.getElementById('date').value;
+		  payload.units = document.getElementById('lbs').value;
+		  req.open('GET', 'http://52.34.160.215:3000/insert?name=' + payload.name + '&reps=' + payload.reps + '&weight=' + payload.weight + '&date=' + payload.date + '&lbs=' + payload.lbs, true);
+		  
+          req.addEventListener('load', function(event){
+			 if (req.status >=200 && req.status <400){
+          			var response = JSON.parse(req.rows);
+            }
+           	 else { 
+      console.log("Error in network request: " + request.statusText);
+          	}
+          })
+          req.send(JSON.stringify(payload));
+          event.preventDefault();
+		  
+        })
+	  }
+
+	  </script>
