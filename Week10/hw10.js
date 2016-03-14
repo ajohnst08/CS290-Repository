@@ -63,20 +63,6 @@ app.get('/insert',function(req,res,next){
   });
 });
 
-
-app.get('/simple-update',function(req,res,next){
-  var context = {};
-  pool.query("UPDATE workouts SET name=?, reps=?, weight=?, due=?, lbs=? WHERE id=? ", [req.query.name, req.query.reps, req.query.weight, req.query.due, req.query.id],
-    function(err, result){
-    if(err){
-      next(err);
-      return;
-    }
-    context.results = "Updated " + result.changedRows + " rows.";
-    res.render('home',context);
-  });
-});
-
 app.use(function(req,res){
   res.type('text/plain');
   res.status(404);
