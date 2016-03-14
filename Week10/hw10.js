@@ -23,7 +23,7 @@ app.get('/',function(req,res,next){
       next(err);
       return;
     }
-    context.results =  "name";
+    context.results =  JSON.stringify(rows);
     res.render('home', context);
   });
 });
@@ -53,11 +53,27 @@ pool.query(createString, function(err){
 
 app.get('/insert',function(req,res,next){
 	var context = {};
-	pool.query("INSERT INTO workouts(`name`,`reps`,`weight`,`due`,`lbs`) VALUES (?,?,?,?,?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, rows, fields){
+	pool.query("INSERT INTO workouts(`name`,`reps`,`weight`,`due`,`lbs`) VALUES (?,?,?,?,?)", [req.query.name, req.query.reps, req.query.weight, req.query.due, req.query.lbs], function(err, result){
     if(err){
       next(err);
       return;
     }
+	context.results = "Inserted";
+	res.render('workouts',context);
+  });
+});
+
+
+app.get('/simple-update',function(req,res,next){
+  var context = {};
+  pool.query("UPDATE workouts SET name=?, reps=?, weight=?, due=?, lbs=? WHERE id=? ", [req.query.name, req.query.reps, req.query.weight, req.query.due, req.query.id],
+    function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    context.results = "Updated " + result.changedRows + " rows.";
+    res.render('home',context);
   });
 });
 

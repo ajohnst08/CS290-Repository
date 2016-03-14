@@ -32,11 +32,11 @@
 		  payload.weight = document.getElementById('weight').value;
 		  payload.date = document.getElementById('date').value;
 		  payload.units = document.getElementById('lbs').value;
-		  req.open('GET', 'http://52.34.160.215:3000/insert?name=' + payload.name + '&reps=' + payload.reps + '&weight=' + payload.weight + '&date=' + payload.date + '&lbs=' + payload.lbs, true);
+		  req.open('GET', 'http://52.34.160.215:3000/insert?name=' + payload.name + '&reps=' + payload.reps + '&weight=' + payload.weight + '&due=' + payload.date + '&lbs=' + payload.lbs, true);
 		  
           req.addEventListener('load', function(event){
 			 if (req.status >=200 && req.status <400){
-			 console.log(req.rows);
+					console.log(req.rows);
           			var response = JSON.parse(req.rows);
             }
            	 else { 
