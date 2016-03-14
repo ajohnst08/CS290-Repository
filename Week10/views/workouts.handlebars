@@ -24,7 +24,7 @@
 <script>
       document.addEventListener('DOMContentLoaded', bindButtons);
       function bindButtons(){
-        document.getElementById('submit').addEventListener('click', function(event){
+        document.getElementById('sub').addEventListener('click', function(event){
           var req = new XMLHttpRequest();
 		  var payload = {name:null,reps:null,weight:null,date:null,lbs:null};
 		  payload.name = document.getElementById('name').value;
